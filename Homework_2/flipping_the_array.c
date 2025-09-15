@@ -15,14 +15,21 @@ void reverse(int arr[], int leftEdge, int rightEdge) {
 int main() 
 {
     int m, n;
-    
+
     printf("Enter the digits 'm' and 'n' separated by a space: ");
     scanf("%d %d", &m, &n);
 
-    int arr[m + n];
-
-    for (int i = 0; i < (m + n); i++)
+    int sizeArr = m + n;
+    int arr[sizeArr];
+    for (int i = 0; i < sizeArr; i++)
         arr[i] = i + 1;
+ 
+        
+    printf("The original array: ");
+    for (int j = 0; j < sizeArr; j++) {
+        printf("%d ", arr[j]);
+    }
+    printf("\n");
 
 
     reverse(arr, 0, m - 1); // flip the first part of the array
@@ -30,8 +37,9 @@ int main()
     reverse(arr, 0, m + n - 1); // flip the entire array
 
 
-    for (int j = 0; j < (m + n); j++)
-        printf("%d ", arr[j]);
+    printf("The modified array: ");
+    for (int k = 0; k < sizeArr; k++)
+        printf("%d ", arr[k]);
 
     return 0;
 }
