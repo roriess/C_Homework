@@ -11,77 +11,74 @@ strToArr:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movq	%rdi, -24(%rbp)
-	movq	%rsi, -32(%rbp)
-	movl	$0, -16(%rbp)
-	movl	$0, -12(%rbp)
-	movq	-24(%rbp), %rax
+	subq	$48, %rsp
+	movq	%rdi, -40(%rbp)
+	movq	%rsi, -48(%rbp)
+	movl	$0, -24(%rbp)
+	movl	$0, -20(%rbp)
+	movq	-40(%rbp), %rax
 	movq	%rax, %rdi
 	call	strlen@PLT
-	movl	%eax, -4(%rbp)
-	movl	$0, -8(%rbp)
+	movq	%rax, -8(%rbp)
+	movq	$0, -16(%rbp)
 	jmp	.L2
 .L5:
-	movl	-8(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
+	movq	-40(%rbp), %rdx
+	movq	-16(%rbp), %rax
 	addq	%rdx, %rax
 	movzbl	(%rax), %eax
 	cmpb	$47, %al
 	jle	.L3
-	movl	-8(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
+	movq	-40(%rbp), %rdx
+	movq	-16(%rbp), %rax
 	addq	%rdx, %rax
 	movzbl	(%rax), %eax
 	cmpb	$57, %al
 	jg	.L3
-	movl	-16(%rbp), %edx
+	movl	-24(%rbp), %edx
 	movl	%edx, %eax
 	sall	$2, %eax
 	addl	%edx, %eax
 	addl	%eax, %eax
 	movl	%eax, %ecx
-	movl	-8(%rbp), %eax
-	movslq	%eax, %rdx
-	movq	-24(%rbp), %rax
+	movq	-40(%rbp), %rdx
+	movq	-16(%rbp), %rax
 	addq	%rdx, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	subl	$48, %eax
 	addl	%ecx, %eax
-	movl	%eax, -16(%rbp)
+	movl	%eax, -24(%rbp)
 	jmp	.L4
 .L3:
-	cmpl	$0, -16(%rbp)
+	cmpl	$0, -24(%rbp)
 	jle	.L4
-	movl	-12(%rbp), %eax
+	movl	-20(%rbp), %eax
 	leal	1(%rax), %edx
-	movl	%edx, -12(%rbp)
+	movl	%edx, -20(%rbp)
 	cltq
 	leaq	0(,%rax,4), %rdx
-	movq	-32(%rbp), %rax
+	movq	-48(%rbp), %rax
 	addq	%rax, %rdx
-	movl	-16(%rbp), %eax
+	movl	-24(%rbp), %eax
 	movl	%eax, (%rdx)
-	movl	$0, -16(%rbp)
+	movl	$0, -24(%rbp)
 .L4:
-	addl	$1, -8(%rbp)
+	addq	$1, -16(%rbp)
 .L2:
-	movl	-8(%rbp), %eax
-	cmpl	-4(%rbp), %eax
-	jl	.L5
-	cmpl	$0, -16(%rbp)
+	movq	-16(%rbp), %rax
+	cmpq	-8(%rbp), %rax
+	jb	.L5
+	cmpl	$0, -24(%rbp)
 	jle	.L7
-	movl	-12(%rbp), %eax
+	movl	-20(%rbp), %eax
 	leal	1(%rax), %edx
-	movl	%edx, -12(%rbp)
+	movl	%edx, -20(%rbp)
 	cltq
 	leaq	0(,%rax,4), %rdx
-	movq	-32(%rbp), %rax
+	movq	-48(%rbp), %rax
 	addq	%rax, %rdx
-	movl	-16(%rbp), %eax
+	movl	-24(%rbp), %eax
 	movl	%eax, (%rdx)
 .L7:
 	nop
@@ -91,9 +88,9 @@ strToArr:
 	.cfi_endproc
 .LFE0:
 	.size	strToArr, .-strToArr
-	.globl	optimal_sorting
-	.type	optimal_sorting, @function
-optimal_sorting:
+	.globl	quicksort
+	.type	quicksort, @function
+quicksort:
 .LFB1:
 	.cfi_startproc
 	endbr64
@@ -102,40 +99,57 @@ optimal_sorting:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
+	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
 	movl	%esi, -28(%rbp)
-	movl	$0, -16(%rbp)
-	jmp	.L9
-.L13:
-	movl	-16(%rbp), %eax
-	movl	%eax, -12(%rbp)
-	movl	-16(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -8(%rbp)
-	jmp	.L10
-.L12:
-	movl	-8(%rbp), %eax
+	movl	%edx, -32(%rbp)
+	movl	-28(%rbp), %eax
+	cmpl	-32(%rbp), %eax
+	jge	.L17
+	movl	-28(%rbp), %edx
+	movl	-32(%rbp), %eax
+	addl	%edx, %eax
+	movl	%eax, %edx
+	shrl	$31, %edx
+	addl	%edx, %eax
+	sarl	%eax
 	cltq
 	leaq	0(,%rax,4), %rdx
 	movq	-24(%rbp), %rax
 	addq	%rdx, %rax
-	movl	(%rax), %edx
+	movl	(%rax), %eax
+	movl	%eax, -8(%rbp)
+	movl	-28(%rbp), %eax
+	movl	%eax, -16(%rbp)
+	movl	-32(%rbp), %eax
+	movl	%eax, -12(%rbp)
+	jmp	.L11
+.L12:
+	addl	$1, -16(%rbp)
+.L11:
+	movl	-16(%rbp), %eax
+	cltq
+	leaq	0(,%rax,4), %rdx
+	movq	-24(%rbp), %rax
+	addq	%rdx, %rax
+	movl	(%rax), %eax
+	cmpl	%eax, -8(%rbp)
+	jg	.L12
+	jmp	.L13
+.L14:
+	subl	$1, -12(%rbp)
+.L13:
 	movl	-12(%rbp), %eax
 	cltq
-	leaq	0(,%rax,4), %rcx
+	leaq	0(,%rax,4), %rdx
 	movq	-24(%rbp), %rax
-	addq	%rcx, %rax
+	addq	%rdx, %rax
 	movl	(%rax), %eax
-	cmpl	%eax, %edx
-	jge	.L11
-	movl	-8(%rbp), %eax
-	movl	%eax, -12(%rbp)
-.L11:
-	addl	$1, -8(%rbp)
-.L10:
-	movl	-8(%rbp), %eax
-	cmpl	-28(%rbp), %eax
-	jl	.L12
+	cmpl	%eax, -8(%rbp)
+	jl	.L14
+	movl	-16(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jg	.L15
 	movl	-16(%rbp), %eax
 	cltq
 	leaq	0(,%rax,4), %rdx
@@ -163,17 +177,33 @@ optimal_sorting:
 	movl	-4(%rbp), %eax
 	movl	%eax, (%rdx)
 	addl	$1, -16(%rbp)
-.L9:
+	subl	$1, -12(%rbp)
+.L15:
 	movl	-16(%rbp), %eax
-	cmpl	-28(%rbp), %eax
-	jl	.L13
+	cmpl	-12(%rbp), %eax
+	jle	.L11
+	movl	-12(%rbp), %edx
+	movl	-28(%rbp), %ecx
+	movq	-24(%rbp), %rax
+	movl	%ecx, %esi
+	movq	%rax, %rdi
+	call	quicksort
+	movl	-32(%rbp), %edx
+	movl	-16(%rbp), %ecx
+	movq	-24(%rbp), %rax
+	movl	%ecx, %esi
+	movq	%rax, %rdi
+	call	quicksort
+	jmp	.L8
+.L17:
 	nop
-	popq	%rbp
+.L8:
+	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE1:
-	.size	optimal_sorting, .-optimal_sorting
+	.size	quicksort, .-quicksort
 	.section	.rodata
 .LC0:
 	.string	"%99[^\n]"
@@ -223,20 +253,20 @@ main:
 	movq	%rdx, %rsi
 	movq	%rax, %rdi
 	call	strToArr
-	movl	$0, -592(%rbp)
-	jmp	.L15
-.L17:
-	addl	$1, -592(%rbp)
-.L15:
-	cmpl	$99, -592(%rbp)
-	jg	.L16
-	movl	-592(%rbp), %eax
+	movl	$0, -588(%rbp)
+	jmp	.L19
+.L21:
+	addl	$1, -588(%rbp)
+.L19:
+	cmpl	$99, -588(%rbp)
+	jg	.L20
+	movl	-588(%rbp), %eax
 	cltq
 	movl	-560(%rbp,%rax,4), %eax
 	testl	%eax, %eax
-	jne	.L17
-.L16:
-	movl	-592(%rbp), %eax
+	jne	.L21
+.L20:
+	movl	-588(%rbp), %eax
 	movslq	%eax, %rdx
 	subq	$1, %rdx
 	movq	%rdx, -576(%rbp)
@@ -259,54 +289,48 @@ main:
 	andq	$-4096, %rcx
 	movq	%rsp, %rdx
 	subq	%rcx, %rdx
-.L18:
+.L22:
 	cmpq	%rdx, %rsp
-	je	.L19
+	je	.L23
 	subq	$4096, %rsp
 	orq	$0, 4088(%rsp)
-	jmp	.L18
-.L19:
+	jmp	.L22
+.L23:
 	movq	%rax, %rdx
 	andl	$4095, %edx
 	subq	%rdx, %rsp
 	movq	%rax, %rdx
 	andl	$4095, %edx
 	testq	%rdx, %rdx
-	je	.L20
+	je	.L24
 	andl	$4095, %eax
 	subq	$8, %rax
 	addq	%rsp, %rax
 	orq	$0, (%rax)
-.L20:
+.L24:
 	movq	%rsp, %rax
 	addq	$3, %rax
 	shrq	$2, %rax
 	salq	$2, %rax
 	movq	%rax, -568(%rbp)
-	movl	$0, -588(%rbp)
-	jmp	.L21
-.L22:
 	movl	-588(%rbp), %eax
 	cltq
-	movl	-560(%rbp,%rax,4), %ecx
+	leaq	0(,%rax,4), %rdx
+	leaq	-560(%rbp), %rcx
 	movq	-568(%rbp), %rax
-	movl	-588(%rbp), %edx
-	movslq	%edx, %rdx
-	movl	%ecx, (%rax,%rdx,4)
-	addl	$1, -588(%rbp)
-.L21:
-	movl	-588(%rbp), %eax
-	cmpl	-592(%rbp), %eax
-	jl	.L22
-	movl	-592(%rbp), %edx
-	leaq	-560(%rbp), %rax
-	movl	%edx, %esi
+	movq	%rcx, %rsi
 	movq	%rax, %rdi
-	call	optimal_sorting
+	call	memcpy@PLT
+	movl	-588(%rbp), %eax
+	leal	-1(%rax), %edx
+	leaq	-560(%rbp), %rax
+	movl	$0, %esi
+	movq	%rax, %rdi
+	call	quicksort
 	movl	$0, -584(%rbp)
 	movl	$0, -580(%rbp)
-	jmp	.L23
-.L25:
+	jmp	.L25
+.L27:
 	movq	-568(%rbp), %rax
 	movl	-580(%rbp), %edx
 	movslq	%edx, %rdx
@@ -315,14 +339,14 @@ main:
 	cltq
 	movl	-560(%rbp,%rax,4), %eax
 	cmpl	%eax, %edx
-	je	.L24
+	je	.L26
 	addl	$1, -584(%rbp)
-.L24:
+.L26:
 	addl	$1, -580(%rbp)
-.L23:
+.L25:
 	movl	-580(%rbp), %eax
-	cmpl	-592(%rbp), %eax
-	jl	.L25
+	cmpl	-588(%rbp), %eax
+	jl	.L27
 	movl	-584(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC1(%rip), %rax
@@ -333,9 +357,9 @@ main:
 	movq	%rbx, %rsp
 	movq	-56(%rbp), %rdx
 	subq	%fs:40, %rdx
-	je	.L27
+	je	.L29
 	call	__stack_chk_fail@PLT
-.L27:
+.L29:
 	leaq	-40(%rbp), %rsp
 	popq	%rbx
 	popq	%r12
