@@ -9,9 +9,9 @@ void strToArr(const char* str, int* arr)
 {
     int currentNum = 0;
     int numCount = 0;
-    int lengthStr = strlen(str);
+    size_t lengthStr = strlen(str);
 
-    for (int i = 0; i < lengthStr; i++) {
+    for (size_t i = 0; i < lengthStr; i++) {
         if (str[i] >= '0' && str[i] <= '9') {
             currentNum = currentNum * 10 + (str[i] - '0');
         } else if (currentNum > 0) {
@@ -24,19 +24,33 @@ void strToArr(const char* str, int* arr)
 }
 
 
-void optimal_sorting(int* arr, int lengthArr) 
+void quicksort(int* arr, int firstElement, int lastElement) 
 {
-    for (int j = 0; j < lengthArr; j++) {
-        int lowestValueIndex = j;
+    if (firstElement >= lastElement)
+        return;
 
-        for (int k = j + 1; k < lengthArr; k++) {
-            if (arr[k] < arr[lowestValueIndex]) 
-                lowestValueIndex = k;
+    int pivot = arr[(firstElement + lastElement) / 2];
+    int left = firstElement;
+    int right = lastElement;
+
+    do {
+        while (arr[left] < pivot) 
+            left++;
+
+        while (arr[right] > pivot) 
+            right--;
+        
+        if (left <= right) {
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
         }
-        int temp = arr[j];
-        arr[j] = arr[lowestValueIndex];
-        arr[lowestValueIndex] = temp;
-    }
+    } while(left <= right);
+
+    quicksort(arr, firstElement, right);
+    quicksort(arr, left, lastElement);
 }
 
 
@@ -56,10 +70,9 @@ int main()
         lengthArr++;
 
     int originalArr[lengthArr];
-    for (int j = 0; j < lengthArr; j++)
-        originalArr[j] = arr[j];
+    memcpy(originalArr, arr, sizeof(int) * lengthArr);
 
-    optimal_sorting(arr, lengthArr);
+    quicksort(arr, 0, lengthArr - 1);
 
     int count = 0;
 
