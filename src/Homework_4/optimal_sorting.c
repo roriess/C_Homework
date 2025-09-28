@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "optimal_sorting.h"
@@ -11,7 +12,7 @@ void strToArr(const char* str, int* arr)
     int numCount = 0;
     size_t lengthStr = strlen(str);
 
-    for (size_t i = 0; i < lengthStr; i++) {
+    for (size_t i = 0; str[i]; i++) {
         if (str[i] >= '0' && str[i] <= '9') {
             currentNum = currentNum * 10 + (str[i] - '0');
         } else if (currentNum > 0) {
@@ -24,35 +25,9 @@ void strToArr(const char* str, int* arr)
 }
 
 
-void quicksort(int* arr, int firstElement, int lastElement) 
-{
-    if (firstElement >= lastElement)
-        return;
-
-    int pivot = arr[(firstElement + lastElement) / 2];
-    int left = firstElement;
-    int right = lastElement;
-
-    do {
-        while (arr[left] < pivot) 
-            left++;
-
-        while (arr[right] > pivot) 
-            right--;
-        
-        if (left <= right) {
-            int temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
-            left++;
-            right--;
-        }
-    } while(left <= right);
-
-    quicksort(arr, firstElement, right);
-    quicksort(arr, left, lastElement);
+static int compare_ints(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
 }
-
 
 int main() 
 {
@@ -66,16 +41,15 @@ int main()
     
     
     int lengthArr = 0;
-    while (lengthArr < MAX_LEN && arr[lengthArr] != 0)
+    while (arr[lengthArr] != 0)
         lengthArr++;
 
     int originalArr[lengthArr];
     memcpy(originalArr, arr, sizeof(int) * lengthArr);
 
-    quicksort(arr, 0, lengthArr - 1);
+    qsort(arr, lengthArr, sizeof(int), compare_ints);
 
     int count = 0;
-
     for (int i = 0; i < lengthArr; i++) {
         if (originalArr[i] != arr[i])
             count++;
