@@ -2,4 +2,5 @@
 
 void strToArr(const char* str, int* arr);
 
-void quicksort(int* arr, int firstElement, int lastElement);
+static int compare_ints(const void* a, const void* b);
+
