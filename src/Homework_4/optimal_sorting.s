@@ -3,7 +3,7 @@
 	.globl	strToArr
 	.type	strToArr, @function
 strToArr:
-.LFB0:
+.LFB6:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -66,9 +66,12 @@ strToArr:
 .L4:
 	addq	$1, -16(%rbp)
 .L2:
+	movq	-40(%rbp), %rdx
 	movq	-16(%rbp), %rax
-	cmpq	-8(%rbp), %rax
-	jb	.L5
+	addq	%rdx, %rax
+	movzbl	(%rax), %eax
+	testb	%al, %al
+	jne	.L5
 	cmpl	$0, -24(%rbp)
 	jle	.L7
 	movl	-20(%rbp), %eax
@@ -86,12 +89,11 @@ strToArr:
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE0:
+.LFE6:
 	.size	strToArr, .-strToArr
-	.globl	quicksort
-	.type	quicksort, @function
-quicksort:
-.LFB1:
+	.type	compare_ints, @function
+compare_ints:
+.LFB7:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -99,111 +101,20 @@ quicksort:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movq	%rdi, -24(%rbp)
-	movl	%esi, -28(%rbp)
-	movl	%edx, -32(%rbp)
-	movl	-28(%rbp), %eax
-	cmpl	-32(%rbp), %eax
-	jge	.L17
-	movl	-28(%rbp), %edx
-	movl	-32(%rbp), %eax
-	addl	%edx, %eax
-	movl	%eax, %edx
-	shrl	$31, %edx
-	addl	%edx, %eax
-	sarl	%eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	(%rax), %eax
-	movl	%eax, -8(%rbp)
-	movl	-28(%rbp), %eax
-	movl	%eax, -16(%rbp)
-	movl	-32(%rbp), %eax
-	movl	%eax, -12(%rbp)
-	jmp	.L11
-.L12:
-	addl	$1, -16(%rbp)
-.L11:
-	movl	-16(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	(%rax), %eax
-	cmpl	%eax, -8(%rbp)
-	jg	.L12
-	jmp	.L13
-.L14:
-	subl	$1, -12(%rbp)
-.L13:
-	movl	-12(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	(%rax), %eax
-	cmpl	%eax, -8(%rbp)
-	jl	.L14
-	movl	-16(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jg	.L15
-	movl	-16(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	(%rax), %eax
-	movl	%eax, -4(%rbp)
-	movl	-12(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rdx, %rax
-	movl	-16(%rbp), %edx
-	movslq	%edx, %rdx
-	leaq	0(,%rdx,4), %rcx
-	movq	-24(%rbp), %rdx
-	addq	%rcx, %rdx
-	movl	(%rax), %eax
-	movl	%eax, (%rdx)
-	movl	-12(%rbp), %eax
-	cltq
-	leaq	0(,%rax,4), %rdx
-	movq	-24(%rbp), %rax
-	addq	%rax, %rdx
-	movl	-4(%rbp), %eax
-	movl	%eax, (%rdx)
-	addl	$1, -16(%rbp)
-	subl	$1, -12(%rbp)
-.L15:
-	movl	-16(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jle	.L11
-	movl	-12(%rbp), %edx
-	movl	-28(%rbp), %ecx
-	movq	-24(%rbp), %rax
-	movl	%ecx, %esi
-	movq	%rax, %rdi
-	call	quicksort
-	movl	-32(%rbp), %edx
-	movl	-16(%rbp), %ecx
-	movq	-24(%rbp), %rax
-	movl	%ecx, %esi
-	movq	%rax, %rdi
-	call	quicksort
-	jmp	.L8
-.L17:
-	nop
-.L8:
-	leave
+	movq	%rdi, -8(%rbp)
+	movq	%rsi, -16(%rbp)
+	movq	-8(%rbp), %rax
+	movl	(%rax), %edx
+	movq	-16(%rbp), %rax
+	movl	(%rax), %ecx
+	movl	%edx, %eax
+	subl	%ecx, %eax
+	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE1:
-	.size	quicksort, .-quicksort
+.LFE7:
+	.size	compare_ints, .-compare_ints
 	.section	.rodata
 .LC0:
 	.string	"%99[^\n]"
@@ -213,7 +124,7 @@ quicksort:
 	.globl	main
 	.type	main, @function
 main:
-.LFB2:
+.LFB8:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -254,18 +165,15 @@ main:
 	movq	%rax, %rdi
 	call	strToArr
 	movl	$0, -588(%rbp)
-	jmp	.L19
-.L21:
+	jmp	.L11
+.L12:
 	addl	$1, -588(%rbp)
-.L19:
-	cmpl	$99, -588(%rbp)
-	jg	.L20
+.L11:
 	movl	-588(%rbp), %eax
 	cltq
 	movl	-560(%rbp,%rax,4), %eax
 	testl	%eax, %eax
-	jne	.L21
-.L20:
+	jne	.L12
 	movl	-588(%rbp), %eax
 	movslq	%eax, %rdx
 	subq	$1, %rdx
@@ -281,33 +189,33 @@ main:
 	movl	$16, %eax
 	subq	$1, %rax
 	addq	%rdx, %rax
-	movl	$16, %esi
+	movl	$16, %edi
 	movl	$0, %edx
-	divq	%rsi
+	divq	%rdi
 	imulq	$16, %rax, %rax
 	movq	%rax, %rcx
 	andq	$-4096, %rcx
 	movq	%rsp, %rdx
 	subq	%rcx, %rdx
-.L22:
+.L13:
 	cmpq	%rdx, %rsp
-	je	.L23
+	je	.L14
 	subq	$4096, %rsp
 	orq	$0, 4088(%rsp)
-	jmp	.L22
-.L23:
+	jmp	.L13
+.L14:
 	movq	%rax, %rdx
 	andl	$4095, %edx
 	subq	%rdx, %rsp
 	movq	%rax, %rdx
 	andl	$4095, %edx
 	testq	%rdx, %rdx
-	je	.L24
+	je	.L15
 	andl	$4095, %eax
 	subq	$8, %rax
 	addq	%rsp, %rax
 	orq	$0, (%rax)
-.L24:
+.L15:
 	movq	%rsp, %rax
 	addq	$3, %rax
 	shrq	$2, %rax
@@ -322,15 +230,17 @@ main:
 	movq	%rax, %rdi
 	call	memcpy@PLT
 	movl	-588(%rbp), %eax
-	leal	-1(%rax), %edx
+	movslq	%eax, %rsi
 	leaq	-560(%rbp), %rax
-	movl	$0, %esi
+	leaq	compare_ints(%rip), %rdx
+	movq	%rdx, %rcx
+	movl	$4, %edx
 	movq	%rax, %rdi
-	call	quicksort
+	call	qsort@PLT
 	movl	$0, -584(%rbp)
 	movl	$0, -580(%rbp)
-	jmp	.L25
-.L27:
+	jmp	.L16
+.L18:
 	movq	-568(%rbp), %rax
 	movl	-580(%rbp), %edx
 	movslq	%edx, %rdx
@@ -339,14 +249,14 @@ main:
 	cltq
 	movl	-560(%rbp,%rax,4), %eax
 	cmpl	%eax, %edx
-	je	.L26
+	je	.L17
 	addl	$1, -584(%rbp)
-.L26:
+.L17:
 	addl	$1, -580(%rbp)
-.L25:
+.L16:
 	movl	-580(%rbp), %eax
 	cmpl	-588(%rbp), %eax
-	jl	.L27
+	jl	.L18
 	movl	-584(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC1(%rip), %rax
@@ -357,9 +267,9 @@ main:
 	movq	%rbx, %rsp
 	movq	-56(%rbp), %rdx
 	subq	%fs:40, %rdx
-	je	.L29
+	je	.L20
 	call	__stack_chk_fail@PLT
-.L29:
+.L20:
 	leaq	-40(%rbp), %rsp
 	popq	%rbx
 	popq	%r12
@@ -370,7 +280,7 @@ main:
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE2:
+.LFE8:
 	.size	main, .-main
 	.ident	"GCC: (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0"
 	.section	.note.GNU-stack,"",@progbits
