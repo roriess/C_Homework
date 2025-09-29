@@ -25,29 +25,35 @@ void strToArr(const char* str, int* arr)
 }
 
 
-static int compare_ints(const void* a, const void* b) {
-    return (*(int*)a - *(int*)b);
+void bubbleSort(int arr[], int lengthArr) {
+    for (int i = 0; i < lengthArr - 1; i++) {
+        for (int j = 0; j < lengthArr - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
+
 
 int main() 
 {
     char str[MAX_LEN];
     scanf("%99[^\n]", str);
 
-    int arr[MAX_LEN];
-    memset(arr, 0, sizeof(arr));
+    int arr[MAX_LEN], originalArr[MAX_LEN];
 
     strToArr(str, arr);
     
-    
     int lengthArr = 0;
-    while (arr[lengthArr] != 0)
+    while (arr[lengthArr])
         lengthArr++;
 
-    int originalArr[lengthArr];
     memcpy(originalArr, arr, sizeof(int) * lengthArr);
 
-    qsort(arr, lengthArr, sizeof(int), compare_ints);
+    bubbleSort(arr, lengthArr);
 
     int count = 0;
     for (int i = 0; i < lengthArr; i++) {
