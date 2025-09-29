@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "optimal_sorting.h"
@@ -12,13 +11,14 @@ void strToArr(const char* str, int* arr)
     int numCount = 0;
     size_t lengthStr = strlen(str);
 
-    for (size_t i = 0; str[i]; i++) {
-        if (str[i] >= '0' && str[i] <= '9') {
-            currentNum = currentNum * 10 + (str[i] - '0');
+    while (*str) {
+        if (*str >= '0' && *str <= '9') {
+            currentNum = currentNum * 10 + (*str - '0');
         } else if (currentNum > 0) {
             arr[numCount++] = currentNum;
             currentNum = 0;
         }
+        str++;
     }
     if (currentNum > 0)
         arr[numCount++] = currentNum;
@@ -36,7 +36,6 @@ void bubbleSort(int arr[], int lengthArr) {
         }
     }
 }
-
 
 int main() 
 {
