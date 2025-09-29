@@ -11,15 +11,10 @@ strToArr:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
 	movq	%rsi, -32(%rbp)
-	movl	$0, -16(%rbp)
-	movl	$0, -12(%rbp)
-	movq	-24(%rbp), %rax
-	movq	%rax, %rdi
-	call	strlen@PLT
-	movq	%rax, -8(%rbp)
+	movl	$0, -8(%rbp)
+	movl	$0, -4(%rbp)
 	jmp	.L2
 .L5:
 	movq	-24(%rbp), %rax
@@ -30,7 +25,7 @@ strToArr:
 	movzbl	(%rax), %eax
 	cmpb	$57, %al
 	jg	.L3
-	movl	-16(%rbp), %edx
+	movl	-8(%rbp), %edx
 	movl	%edx, %eax
 	sall	$2, %eax
 	addl	%edx, %eax
@@ -41,21 +36,21 @@ strToArr:
 	movsbl	%al, %eax
 	subl	$48, %eax
 	addl	%edx, %eax
-	movl	%eax, -16(%rbp)
+	movl	%eax, -8(%rbp)
 	jmp	.L4
 .L3:
-	cmpl	$0, -16(%rbp)
+	cmpl	$0, -8(%rbp)
 	jle	.L4
-	movl	-12(%rbp), %eax
+	movl	-4(%rbp), %eax
 	leal	1(%rax), %edx
-	movl	%edx, -12(%rbp)
+	movl	%edx, -4(%rbp)
 	cltq
 	leaq	0(,%rax,4), %rdx
 	movq	-32(%rbp), %rax
 	addq	%rax, %rdx
-	movl	-16(%rbp), %eax
+	movl	-8(%rbp), %eax
 	movl	%eax, (%rdx)
-	movl	$0, -16(%rbp)
+	movl	$0, -8(%rbp)
 .L4:
 	addq	$1, -24(%rbp)
 .L2:
@@ -63,20 +58,20 @@ strToArr:
 	movzbl	(%rax), %eax
 	testb	%al, %al
 	jne	.L5
-	cmpl	$0, -16(%rbp)
+	cmpl	$0, -8(%rbp)
 	jle	.L7
-	movl	-12(%rbp), %eax
+	movl	-4(%rbp), %eax
 	leal	1(%rax), %edx
-	movl	%edx, -12(%rbp)
+	movl	%edx, -4(%rbp)
 	cltq
 	leaq	0(,%rax,4), %rdx
 	movq	-32(%rbp), %rax
 	addq	%rax, %rdx
-	movl	-16(%rbp), %eax
+	movl	-8(%rbp), %eax
 	movl	%eax, (%rdx)
 .L7:
 	nop
-	leave
+	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
