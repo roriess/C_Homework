@@ -9,7 +9,6 @@ void strToArr(const char* str, int* arr)
 {
     int currentNum = 0;
     int numCount = 0;
-    size_t lengthStr = strlen(str);
 
     while (*str) {
         if (*str >= '0' && *str <= '9') {
