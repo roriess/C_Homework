@@ -34,7 +34,7 @@ int main(void)
             push(stack, string[i]);
 
         if (isInArray(string[i], closingBrackets, sizeof(closingBrackets) - 1)) {
-            if (stack->top == 1) {
+            if (stack->top == -1) {
                 puts("The balance of parentheses in the line is broken");
                 return 1;
             }
@@ -50,7 +50,7 @@ int main(void)
             }
         }
     }
-    if (stack->top == 1) {
+    if (stack->top == -1) {
         puts("The balance of parentheses in the line is maintained");
     } else {
         puts("The balance of parentheses in the line is broken");
