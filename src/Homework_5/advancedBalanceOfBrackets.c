@@ -8,7 +8,7 @@
 
 int isInArray(char ch, char array[], int size) 
 {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size - 1; i++) {
         if (array[i] == ch)
             return 1;
     }
@@ -30,12 +30,12 @@ int main(void)
     char closingBrackets[] = ")}]";
 
     for (int i = 0; i < lenString; i++) {
-        if (isInArray(string[i], openingBrackets, 3))
+        if (isInArray(string[i], openingBrackets, sizeof(openingBrackets) - 1))
             push(stack, string[i]);
 
-        if (isInArray(string[i], closingBrackets, 3)) {
-            if (!stack) {
-                puts("The balance of parentheses in the line is broken");
+        if (isInArray(string[i], closingBrackets, sizeof(closingBrackets) - 1)) {
+            if (stack->top == -1) {
+                puts("The balance of parentheses in the line is broken,");
                 return 1;
             }
 
@@ -45,12 +45,12 @@ int main(void)
             if (p != NULL && q != NULL && (p - openingBrackets) == (q - closingBrackets)) {
                 pop(stack);
             } else {
-                puts("The balance of parentheses in the line is broken");
+                puts("The balance of parentheses in the line is broken.");
                 return 1;
             }
         }
     }
-    if (!stack) {
+    if (stack->top == -1) {
         puts("The balance of parentheses in the line is maintained");
     } else {
         puts("The balance of parentheses in the line is broken");
