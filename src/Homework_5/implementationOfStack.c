@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STACK_SIZE 100
-
-
-typedef struct
-{
-    int data[STACK_SIZE];
-    int top;
-} Stack;
+#include "implementationOfStack.h"
 
 
 Stack* new(void) 
@@ -53,7 +46,7 @@ int peek(Stack *stack)
 }
 
 
-void delete(Stack *stack) 
+void del(Stack *stack) 
 {
     if (stack)
         free(stack);
