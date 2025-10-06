@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 int priority(char element);
 
 bool isLeftBracket(char element);
