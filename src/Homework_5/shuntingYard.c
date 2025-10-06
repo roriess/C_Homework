@@ -3,8 +3,8 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "implementationOfStack.c"
-#include "checkingForASymbol.c"
+#include "implementationOfStack.h"
+#include "checkingForASymbol.h"
 
 #define MAX_LEN 100
 
