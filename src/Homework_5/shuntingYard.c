@@ -23,6 +23,9 @@ int main(void)
 
     for (int i = 0; i < size; i++) {
         char element = mathExpression[i];
+        
+        if (element == ' ')
+            continue;
 
         if (isdigit(element)) {
             result[end++] = element;
@@ -56,7 +59,7 @@ int main(void)
     while (operators->top != -1)
         result[end++] = pop(operators);
 
-    printf("%s", result);
+    printf("%s\n", result);
 
     del(operators);
     return 0;
