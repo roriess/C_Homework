@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "implementationOfStack.h"
 
 
