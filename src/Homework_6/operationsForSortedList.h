@@ -1,7 +1,5 @@
 #pragma once
 
-#include "operationsForSortedList.c"
-
 
 typedef struct elementFromList {
     int data;
