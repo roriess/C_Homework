@@ -1,13 +1,13 @@
-all: sortedList
+all: countingRhyme
 
-sortedList: operationsForSortedList.o sortedList.o
-	gcc -Wall -Wextra -O3 operationsForSortedList.o sortedList.o -o sortedList
+countingRhyme: operationsForList.o countingRhyme.o
+	gcc -Wall -Wextra -O3 operationsForList.o countingRhyme.o -o countingRhyme
 
-operationsForSortedList.o: operationsForSortedList.c
-	gcc -Wall -Wextra -O3 -c operationsForSortedList.c
+operationsForList.o: operationsForList.c
+	gcc -Wall -Wextra -O3 -c operationsForList.c
 
-sortedList.o: sortedList.c
-	gcc -Wall -Wextra -O3 -c sortedList.c
+countingRhyme.o: countingRhyme.c
+	gcc -Wall -Wextra -O3 -c countingRhyme.c
 
 clean:
-	rm -f *.o sortedList
+	rm -f *.o countingRhyme
