@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = @CMakeFiles/implementationOfStack.dir/includes_C.rsp
 
-C_FLAGS = 
+C_FLAGS =  -Wall -Wextra -pedantic
 

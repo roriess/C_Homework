@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = @CMakeFiles/checkingForASymbol.dir/includes_C.rsp
 
-C_FLAGS = 
+C_FLAGS =  -Wall -Wextra -pedantic
 
