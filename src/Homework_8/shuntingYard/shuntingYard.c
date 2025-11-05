@@ -59,6 +59,7 @@ int main(void)
     while (operators->top != -1)
         result[end++] = pop(operators);
 
+    result[end] = '\0';
     printf("%s\n", result);
 
     del(operators);
