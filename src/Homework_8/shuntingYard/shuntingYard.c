@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "implementationOfStack.h"
+#include "../implementationOfStack.h"
 #include "checkingForASymbol.h"
 
 #define MAX_LEN 100
