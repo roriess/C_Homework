@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libimplementationOfStack.a CMakeFiles/implementationOfStack.dir/implementationOfStack.c.obj
+C:\MinGW\bin\ranlib.exe libimplementationOfStack.a

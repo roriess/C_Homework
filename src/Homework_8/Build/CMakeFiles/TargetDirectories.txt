@@ -1,0 +1,6 @@
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/implementationOfStack.dir
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/checkingForASymbol.dir
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/advancedBalanceOfBrackets.dir
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/shuntingYard.dir
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/edit_cache.dir
+C:/Users/rorie/Desktop/C_Homework/src/Homework_8/Build/CMakeFiles/rebuild_cache.dir
