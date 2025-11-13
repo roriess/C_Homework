@@ -7,6 +7,7 @@ void initStack(Stack* stack)
     stack->top = -1;
 }
 
+
 void push(Stack *stack, int element)
 {
     if (stack->top + 1 >= STACK_SIZE) {
