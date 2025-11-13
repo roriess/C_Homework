@@ -1,17 +1,11 @@
 #include "implementationOfStack.h"
 
+Stack stack;
 
-Stack* new(void) 
+void initStack(Stack* stack)
 {
-    Stack *stack = (Stack*)malloc(sizeof(Stack));
-    if (!stack) {
-        printf("Memory allocation error for stack structure\n");
-        return NULL;
-    }
     stack->top = -1;
-    return stack;
 }
-
 
 void push(Stack *stack, int element)
 {
