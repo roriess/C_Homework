@@ -11,7 +11,7 @@ typedef struct
     int top;
 } Stack;
 
-Stack* new(void);
+void initStack(Stack* stack);
 
 void push(Stack *stack, int element);
 
