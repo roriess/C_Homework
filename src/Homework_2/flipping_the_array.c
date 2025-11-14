@@ -12,7 +12,7 @@ void reverse(int arr[], int leftEdge, int rightEdge) {
 }
 
 
-int main() 
+int main()
 {
     int m, n;
 

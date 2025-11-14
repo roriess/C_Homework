@@ -16,7 +16,7 @@ int main()
     s1[strcspn(s1, "\n")] = '\0';
 
 
-    const char *p = s;
+    const char* p = s;
     int count = 0;
 
     while ((p = strstr(p, s1)) != 0) {

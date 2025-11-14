@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include <stdio.h>
 
 #define MAX_SUM 27 // Maximum possible sum of three digits
 #define MIN_SUM 0 // Minimum possible sum of three digits
@@ -21,8 +21,9 @@ int main()
         sprintf(strTicketNumber, "%d", ticketNumber);
 
         int digits[6];
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++) {
             digits[i] = strTicketNumber[i] - '0';
+        }
  
         if ((digits[0] + digits[1] + digits[2]) == sum && (digits[3] + digits[4] + digits[5]) == sum)
             count++;

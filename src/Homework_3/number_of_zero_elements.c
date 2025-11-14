@@ -4,8 +4,8 @@
 
 #define MAX_LEN 100
 
-int main() 
-{ 
+int main()
+{
     char arr[MAX_LEN];
 
     printf("Enter the array elements: ");
@@ -19,7 +19,7 @@ int main()
     while (a != NULL) {
         int numberA = atoi(a);
         
-        if (numberA == 0) 
+        if (numberA == 0)
             count++;
 
         a = strtok(NULL, " ");

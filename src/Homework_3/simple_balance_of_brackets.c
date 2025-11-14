@@ -20,7 +20,7 @@ int main()
             openingParentheses++;
         } else if (string[i] == ')') {
             if (openingParentheses != 0) {
-            openingParentheses--;
+                openingParentheses--;
             } else {
                 printf("The balance of parentheses in the line is broken");
                 return 1;
