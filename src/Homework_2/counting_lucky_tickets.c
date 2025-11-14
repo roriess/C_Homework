@@ -23,7 +23,7 @@ int main()
         int digits[6];
         for (int i = 0; i < 6; i++)
             digits[i] = strTicketNumber[i] - '0';
- 
+
         if ((digits[0] + digits[1] + digits[2]) == sum && (digits[3] + digits[4] + digits[5]) == sum)
             count++;
     }
