@@ -11,7 +11,8 @@
 int main(void) 
 {
     char mathExpression[MAX_LEN];
-    Stack *operators = new();
+    Stack *operators;
+    initStack(operators);
     char result[MAX_LEN];
     int end = 0;
 
@@ -59,6 +60,7 @@ int main(void)
     while (operators->top != -1)
         result[end++] = pop(operators);
 
+    result[end] = '\0';
     printf("%s\n", result);
 
     del(operators);
