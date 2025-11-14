@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-int main() 
+int main()
 {
     int choice;
     printf("Choose type of number:\n1. Integer\n2. Floating-point\n");
     scanf("%d", &choice);
-    
 
-    switch(choice) {
+    switch (choice) {
     case 1: {
         int x;
         printf("Enter x value: ");

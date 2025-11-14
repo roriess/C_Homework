@@ -11,7 +11,6 @@ int main()
     fgets(string, MAX_LEN, stdin);
     string[strcspn(string, "\n")] = '\0';
 
-
     int openingParentheses = 0;
     int lenString = strlen(string);
 

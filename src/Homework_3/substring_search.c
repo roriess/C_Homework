@@ -15,7 +15,6 @@ int main()
     fgets(s1, MAX_LEN, stdin);
     s1[strcspn(s1, "\n")] = '\0';
 
-
     const char* p = s;
     int count = 0;
 

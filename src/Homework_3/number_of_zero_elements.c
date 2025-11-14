@@ -12,13 +12,12 @@ int main()
     fgets(arr, MAX_LEN, stdin);
     arr[strcspn(arr, "\n")] = '\0';
 
-
     int count = 0;
 
-    char *a = strtok(arr, " ");
+    char* a = strtok(arr, " ");
     while (a != NULL) {
         int numberA = atoi(a);
-        
+
         if (numberA == 0)
             count++;
 
