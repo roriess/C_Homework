@@ -3,7 +3,6 @@
 
 #include "operationsForList.h"
 
-
 list* createList()
 {
     list* numList = malloc(sizeof(list));

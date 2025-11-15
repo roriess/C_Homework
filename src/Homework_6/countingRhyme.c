@@ -4,7 +4,6 @@
 
 #include "operationsForList.h"
 
-
 int main(void)
 {
     int warriorsNum, killNum;
