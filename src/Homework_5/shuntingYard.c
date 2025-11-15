@@ -3,9 +3,9 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "implementationOfStack.c"
+#include "implementationOfStack.h"
 
-#include "checkingForASymbol.c"
+#include "checkingForASymbol.h"
 
 #define MAX_LEN 100
 
