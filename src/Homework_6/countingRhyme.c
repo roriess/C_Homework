@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include <stdlib.h>
 
 #include "operationsForList.h"
@@ -6,16 +7,13 @@
 int main(void)
 {
     int warriorsNum, killNum;
-
     printf("Enter the number of warriors and the serial number of the warrior to be killed: ");
     if (scanf("%d %d", &warriorsNum, &killNum) != 2) {
         printf("Failed to read integer.\n");
         return 1;
     }
 
-
     list* warriorsList = createList();
-
     for (int i = 1; i <= warriorsNum; i++)
         addElementToList(warriorsList, i);
 
@@ -32,16 +30,12 @@ int main(void)
             if (current  == NULL)
                 current = warriorsList->firstElement;
         }
-
         toKill = current;
-
         current = current->nextElement;
         prev->nextElement = current;
 
-
         if (toKill == warriorsList->firstElement)
             warriorsList->firstElement = current;
-
         (warriorsList->listSize)--;
         free(toKill);
         toKill = NULL;

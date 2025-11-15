@@ -4,7 +4,7 @@
 #include "operationsForList.h"
 
 
-list* createList() 
+list* createList()
 {
     list* numList = malloc(sizeof(list));
     if (numList == NULL) {
@@ -19,11 +19,9 @@ list* createList()
     return numList;
 }
 
-
-void addElementToList(list* numList, int newElement) 
+void addElementToList(list* numList, int newElement)
 {
     element* newElm = malloc(sizeof(element));
-
     if (newElm == NULL) {
         printf("Error: Memory allocation failed.\n");
         exit(EXIT_FAILURE);
@@ -55,6 +53,5 @@ void addElementToList(list* numList, int newElement)
                 numList->lastElement = newElm;
         }
     }
-
     (numList->listSize)++;
 }

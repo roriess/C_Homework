@@ -6,13 +6,11 @@ typedef struct elementFromList {
     struct elementFromList* nextElement;
 } element;
 
-
 typedef struct listOfElements {
     element* lastElement;
     element* firstElement;
     int listSize;
 } list;
-
 
 list* createList();
 
