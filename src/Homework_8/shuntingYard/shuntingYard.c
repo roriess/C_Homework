@@ -12,7 +12,7 @@
 int main(void)
 {
     char mathExpression[MAX_LEN];
-    Stack *operators = new();
+    Stack* operators = new ();
     char result[MAX_LEN];
     int end = 0;
 
@@ -40,7 +40,6 @@ int main(void)
         if (isRightBracket(element)) {
             while (operators->top != -1 && !isLeftBracket(peek(operators)))
                 result[end++] = pop(operators);
-
             if (operators->top != -1)
                 pop(operators);
 
@@ -48,11 +47,10 @@ int main(void)
         }
 
         if (isOperator(element)) {
-            while (operators->top != -1 && priority(element) <= priority(peek(operators)))
+            while (operators->top != -1 && priority(element) <= priority(peek(operators))) {
                 result[end++] = pop(operators);
             }
             push(operators, element);
-
             continue;
         }
 
@@ -65,4 +63,5 @@ int main(void)
     del(operators);
 
     return 0;
+    }
 }

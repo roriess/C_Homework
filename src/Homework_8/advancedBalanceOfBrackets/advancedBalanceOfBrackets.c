@@ -18,8 +18,7 @@ int isInArray(char ch, char array[], int size)
 int main(void)
 {
     char string[MAX_LEN];
-    Stack* stack = new();
-
+    Stack* stack = new ();
     printf("Enter an expression containing parentheses: ");
     fgets(string, MAX_LEN, stdin);
     string[strcspn(string, "\n")] = '\0';
@@ -37,8 +36,8 @@ int main(void)
                 puts("The balance of parentheses in the line is broken");
                 return 1;
             }
-            char *p = strchr(openingBrackets, peek(stack));
-            char *q = strchr(closingBrackets, string[i]);
+            char* p = strchr(openingBrackets, peek(stack));
+            char* q = strchr(closingBrackets, string[i]);
 
             if (p != NULL && q != NULL && (p - openingBrackets) == (q - closingBrackets)) {
                 pop(stack);
