@@ -1,15 +1,20 @@
 #include "checkingForASymbol.h"
 
-
-int priority(char element) 
+int priority(char element)
 {
-    switch(element) {
-    case '+': return 1;
-    case '-': return 1;
-    case '*': return 2;
-    case '/': return 2;
-    default: return 0;
+    switch (element) {
+    case '+':
+        return 1;
+    case '-':
+        return 1;
+    case '*':
+        return 2;
+    case '/':
+        return 2;
+    default:
+        return 0;
     }
+
 }
 
 

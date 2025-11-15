@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include <ctype.h>
 #include <string.h>
 
@@ -7,11 +8,10 @@
 
 #define MAX_LEN 100
 
-
-int main(void) 
+int main(void)
 {
     char mathExpression[MAX_LEN];
-    Stack *operators;
+    Stack* operators;
     initStack(operators);
     char result[MAX_LEN];
     int end = 0;
@@ -21,7 +21,6 @@ int main(void)
     mathExpression[strcspn(mathExpression, "\n")] = '\0';
 
     int size = strlen(mathExpression);
-
     for (int i = 0; i < size; i++) {
         char element = mathExpression[i];
         
@@ -51,9 +50,7 @@ int main(void)
         if (isOperator(element)) {
             while (operators->top != -1 && priority(element) <= priority(peek(operators)))
                 result[end++] = pop(operators);
-            }
             push(operators, element);
-
             continue;
         }
 
