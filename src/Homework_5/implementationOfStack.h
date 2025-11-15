@@ -13,10 +13,10 @@ typedef struct
 
 void initStack(Stack* stack);
 
-void push(Stack *stack, int element);
+void push(Stack* stack, int element);
 
-int pop(Stack *stack);
+int pop(Stack* stack);
 
-int peek(Stack *stack);
+int peek(Stack* stack);
 
-void del(Stack *stack);
+void del(Stack* stack);

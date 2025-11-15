@@ -14,15 +14,12 @@ int priority(char element)
     default:
         return 0;
     }
-
 }
-
 
 bool isLeftBracket(char element)
 {
     return element == '(';
 }
-
 
 bool isRightBracket(char element)
 {

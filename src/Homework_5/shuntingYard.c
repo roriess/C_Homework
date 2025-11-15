@@ -3,8 +3,9 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "implementationOfStack.h"
-#include "checkingForASymbol.h"
+#include "implementationOfStack.c"
+
+#include "checkingForASymbol.c"
 
 #define MAX_LEN 100
 
@@ -23,7 +24,6 @@ int main(void)
     int size = strlen(mathExpression);
     for (int i = 0; i < size; i++) {
         char element = mathExpression[i];
-        
         if (element == ' ')
             continue;
 
@@ -48,18 +48,20 @@ int main(void)
         }
 
         if (isOperator(element)) {
-            while (operators->top != -1 && priority(element) <= priority(peek(operators)))
+            while (operators->top != -1 && priority(element) <= priority(peek(operators))) {
                 result[end++] = pop(operators);
+            }
             push(operators, element);
             continue;
         }
-
-    while (operators->top != -1)
+    }
+    while (operators->top != -1) {
         result[end++] = pop(operators);
-
+    }
     result[end] = '\0';
-    printf("%s\n", result);
 
+    printf("%s\n", result);
     del(operators);
+
     return 0;
 }

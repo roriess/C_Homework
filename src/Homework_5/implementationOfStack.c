@@ -7,7 +7,6 @@ void initStack(Stack* stack)
     stack->top = -1;
 }
 
-
 void push(Stack* stack, int element)
 {
     if (stack->top + 1 >= STACK_SIZE) {
@@ -17,7 +16,7 @@ void push(Stack* stack, int element)
     stack->data[++stack->top] = element;
 }
 
-int pop(Stack* stack) 
+int pop(Stack* stack)
 {
     if (stack->top == -1) {
         printf("Error: stack is empty\n");
