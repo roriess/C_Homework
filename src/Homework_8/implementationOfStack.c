@@ -2,7 +2,7 @@
 
 Stack* new(void)
 {
-    Stack *stack = (Stack*)malloc(sizeof(Stack));
+    Stack* stack = (Stack*)malloc(sizeof(Stack));
     if (!stack) {
         printf("Memory allocation error for stack structure\n");
         return NULL;
@@ -11,7 +11,7 @@ Stack* new(void)
     return stack;
 }
 
-void push(Stack *stack, int element)
+void push(Stack* stack, int element)
 {
     if (stack->top + 1 >= STACK_SIZE) {
         printf("Error: stack is overflow\n");
@@ -20,7 +20,7 @@ void push(Stack *stack, int element)
     stack->data[++stack->top] = element;
 }
 
-int pop(Stack *stack)
+int pop(Stack* stack)
 {
     if (stack->top == -1) {
         printf("Error: stack is empty\n");
@@ -29,7 +29,7 @@ int pop(Stack *stack)
     return stack->data[(stack->top)--];
 }
 
-int peek(Stack *stack)
+int peek(Stack* stack)
 {
     if (stack->top == -1) {
         printf("Error: stack is empty\n");
@@ -38,7 +38,7 @@ int peek(Stack *stack)
     return stack->data[stack->top];
 }
 
-void del(Stack *stack)
+void del(Stack* stack)
 {
     if (stack)
         free(stack);
