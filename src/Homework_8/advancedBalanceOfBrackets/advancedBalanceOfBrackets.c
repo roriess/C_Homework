@@ -1,12 +1,12 @@
 #include <stdio.h>
+
 #include <string.h>
 
 #include "../implementationOfStack.h"
 
 #define MAX_LEN 100
 
-
-int isInArray(char ch, char array[], int size) 
+int isInArray(char ch, char array[], int size)
 {
     for (int i = 0; i < size; i++) {
         if (array[i] == ch)
@@ -15,8 +15,7 @@ int isInArray(char ch, char array[], int size)
     return 0;
 }
 
-
-int main(void) 
+int main(void)
 {
     char string[MAX_LEN];
     Stack* stack = new();
@@ -38,7 +37,6 @@ int main(void)
                 puts("The balance of parentheses in the line is broken");
                 return 1;
             }
-
             char *p = strchr(openingBrackets, peek(stack));
             char *q = strchr(closingBrackets, string[i]);
 
@@ -56,7 +54,7 @@ int main(void)
         puts("The balance of parentheses in the line is broken");
         return 1;
     }
-
     del(stack);
+
     return 0;
 }

@@ -1,14 +1,15 @@
 #include <stdio.h>
+
 #include <ctype.h>
 #include <string.h>
 
 #include "../implementationOfStack.h"
+
 #include "checkingForASymbol.h"
 
 #define MAX_LEN 100
 
-
-int main(void) 
+int main(void)
 {
     char mathExpression[MAX_LEN];
     Stack *operators = new();
@@ -23,7 +24,6 @@ int main(void)
 
     for (int i = 0; i < size; i++) {
         char element = mathExpression[i];
-
         if (element == ' ')
             continue;
 
@@ -63,5 +63,6 @@ int main(void)
     printf("%s\n", result);
 
     del(operators);
+
     return 0;
 }
