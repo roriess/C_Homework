@@ -4,6 +4,7 @@
 
 #include "operationsForList.h"
 
+
 int main(void)
 {
     int warriorsNum, killNum;
@@ -27,7 +28,7 @@ int main(void)
         for (int i = 1; i < killNum; i++) { // moving to the next warrior to be killed
             prev = current;
             current = current->nextElement;
-            if (current  == NULL)
+            if (current == NULL)
                 current = warriorsList->firstElement;
         }
         toKill = current;
