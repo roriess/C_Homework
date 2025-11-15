@@ -53,6 +53,7 @@ int main(void)
             push(operators, element);
             continue;
         }
+    }
     while (operators->top != -1) {
         result[end++] = pop(operators);
     }
@@ -61,5 +62,4 @@ int main(void)
     printf("%s\n", result);
     del(operators);
     return 0;
-    }
 }
