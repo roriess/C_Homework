@@ -53,15 +53,13 @@ int main(void)
             push(operators, element);
             continue;
         }
-
-    while (operators->top != -1)
+    while (operators->top != -1) {
         result[end++] = pop(operators);
-
+    }
     result[end] = '\0';
+
     printf("%s\n", result);
-
     del(operators);
-
     return 0;
     }
 }
