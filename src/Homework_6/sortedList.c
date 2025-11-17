@@ -3,12 +3,11 @@
 
 #include "operationsForSortedList.h"
 
-
-int main(void) 
+int main(void)
 {
     int enteredValue;
     list* numList = createList();
-    
+
     printf("1 - Add an element\n");
     printf("2 - Delete an element\n");
     printf("3 - Print the list\n");
@@ -38,7 +37,6 @@ int main(void)
 
         if (enteredValue == 3)
             printTheList(numList);
-
 
         printf("Enter the command: ");
         scanf("%d", &enteredValue);
