@@ -61,7 +61,7 @@ void deleteElementFromList(list* numList, int delElm)
 {
     if (numList->listSize == 0 || numList->firstElement == NULL) {
         printf("Error: list is empty!\n");
-        exit(EXIT_FAILURE);
+        return;
     }
 
     element* current = numList->firstElement;
@@ -74,7 +74,7 @@ void deleteElementFromList(list* numList, int delElm)
 
     if (current == NULL) {
         printf("Error: Element not found!\n");
-        exit(EXIT_FAILURE);
+        return;
     }
 
     if (prev == NULL) {
