@@ -76,11 +76,11 @@ void runTests()
 {
     bool addOneElm = addOneElement();
     bool delete = deleteOneElement();
-    bool empty = emptyList();
+    bool emptyLst = emptyList();
     bool uncorrectElm = deleteUncorrectElement();
     bool addLargeNumberOfElm = addLargeNumberOfElements();
 
-    bool result = addOneElm && delete && empty && uncorrectElm && addLargeNumberOfElm;
+    bool result = addOneElm && delete && emptyLst && uncorrectElm && addLargeNumberOfElm;
     if (result) {
         printf("All tests passed successfully!\n");
     } else {
@@ -89,7 +89,7 @@ void runTests()
             printf("- Adding one element failed\n");
         if (!delete)
             printf("- Deleting elements failed\n");
-        if (!empty)
+        if (!emptyLst)
             printf("- Creating empty list failed\n");
         if (!uncorrectElm)
             printf("- Handling incorrect deletion failed\n");
