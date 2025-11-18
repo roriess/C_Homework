@@ -80,7 +80,12 @@ void runTests()
     bool uncorrectElm = deleteUncorrectElement();
     bool addLargeNumberOfElm = addLargeNumberOfElements();
 
-    if (addOneElm && delete && emptyLst && uncorrectElm && addLargeNumberOfElm) {
+    result1 = addOneElm && delete;
+    result2 = emptyLst && uncorrectElm;
+    result3 = result1 && addLargeNumberOfElm;
+    finalResult = result3 && result2;
+
+    if (finalResult) {
         printf("All tests passed successfully!\n");
     } else {
         printf("Some tests failed:\n");
