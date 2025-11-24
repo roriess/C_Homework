@@ -16,12 +16,13 @@ char* bin(int elm)
     return binElm;
 }
 
-int main() {
+int main()
+{
     int a, b;
     scanf("%d %d", &a, &b);
 
     printf("%d: %s\n", a, bin(a));
     printf("%d: %s\n", b, bin(b));
-    
+
     return 0;
 }
