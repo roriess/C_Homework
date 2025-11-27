@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 char* intToBin(int elm)
 {
     size_t bits = sizeof(int) * 8;
