@@ -1,7 +1,9 @@
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
-char* bin(int elm)
+
+char* intToBin(int elm)
 {
     size_t bits = sizeof(int) * 8;
     static char binElm[40];
@@ -17,6 +19,21 @@ char* bin(int elm)
     binElm[index] = '\0';
 
     return binElm;
+}
+
+int binToInt(char elm[])
+{
+    int intElm = 0;
+    int len = strlen(elm) - 1;
+    int degree = 0;
+
+    while (len >= 0) {
+        if (elm[len] != ' ')
+            intElm += (elm[len] - '0') * pow(2, degree);
+        len--;
+        degree++;
+    }
+    return intElm;
 }
 
 char* sum(char elm1[], char elm2[])
@@ -58,13 +75,15 @@ int main()
     char binA[40];
     char binB[40];
 
-    strcpy(binA, bin(a));
-    strcpy(binB, bin(b));
+    strcpy(binA, intToBin(a));
+    strcpy(binB, intToBin(b));
 
-    printf("%d: %s\n", a, binA);
-    printf("%d: %s\n", b, binB);
+    printf("%d to bin: %s\n", a, binA);
+    printf("%d to bin: %s\n", b, binB);
 
     printf("%d + %d: %s\n", a, b, sum(binA, binB));
+
+    printf("%s to int: %d\n", sum(binA, binB), binToInt(sum(binA, binB)));
 
     return 0;
 }
