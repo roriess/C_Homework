@@ -128,7 +128,7 @@ void runTests()
     if (!elmPlusNegElm()) {
         printf("Error when elm + -elm\n");
         result = 0;
-    } 
+    }
     if (!largeElmPlusLargeElm()) {
         printf("Error when largeElm + largeElm\n");
         result = 0;

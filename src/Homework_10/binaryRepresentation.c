@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "operationsForCalculations.c"
 #include "testsForBinaryRepresentation.c"
 
@@ -42,11 +41,10 @@ int main(int argc, char* argv[])
         char sumElm[40];
         strcpy(sumElm, sum(binA, binB));
 
-
         printf("%d + %d: %s\n", a, b, sumElm);
 
         printf("%s to int: %d\n", sumElm, binToInt(sumElm));
     }
-    
+
     return 0;
 }
