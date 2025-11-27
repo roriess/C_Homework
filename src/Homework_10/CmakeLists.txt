@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.25)
+project(homework10 C)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic -std=c11")
+
+add_library(operationsForCalculations ${PROJECT_SOURCE_DIR}/operationsForCalculations.c)
+add_library(testsForbinaryRepresentation ${PROJECT_SOURCE_DIR}/testsForbinaryRepresentation.c)
+
+target_include_directories(operationsForCalculations PUBLIC ${PROJECT_SOURCE_DIR})
+
+add_executable(binaryRepresentation ${PROJECT_SOURCE_DIR}/binaryRepresentation.c)
+
+target_link_libraries(binaryRepresentation PRIVATE operationsForCalculations testsForbinaryRepresentation m)
