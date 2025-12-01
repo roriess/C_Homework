@@ -1,30 +1,37 @@
-#include <stdint.h>
-#include <stdio.h>
+#include "operationsForDoubleNum.h"
+#include "testsForDoubleUnderMicroscope.c"
 
 #define TWO_TO_52_POWER 4503599527370496.0
 
-int main(void)
+int main(int argc, char* argv[])
 {
-    double valueNum;
-    printf("Enter a number: ");
-    scanf("%lf", &valueNum);
+    int flag = 1;
+    if (argc > 1) {
+        for (int i = 1; i < argc; i++) {
+            if (strcmp(argv[i], "--test") == 0) {
+                runTests();
+                flag = 0;
+                break;
+            }
+        }
+    }
+    if (flag) {
+        double valueNum;
+        printf("Enter a number: ");
+        scanf("%lf", &valueNum);
 
-    union Number {
-        double value;
-        uint64_t bits;
-    };
+        if (valueNum == 0.0) {
+            printf("Result: +0.0*2^0\n");
+        } else {
+            union Number num;
+            num.value = valueNum;
+            char s = findNumSign(num);
+            double m = findMantissa(num);
+            int p = findExponentOfNum(num);
 
-    union Number num;
-    num.value = valueNum;
-
-    char s = (num.bits >> 63) ? '-' : '+';
-
-    uint64_t m_bits = num.bits & (1ULL << 52) - 1;
-    double m = 1.0 + (double)m_bits / TWO_TO_52_POWER;
-
-    int p = ((num.bits >> 52) & 0x7FF) - 1023;
-
-    printf("Result: %c%g*2^%d\n", s, m, p);
+            printf("Result: %c%g*2^%d\n", s, m, p);
+        }
+    }
 
     return 0;
 }
