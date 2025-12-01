@@ -1,5 +1,6 @@
-#include <stdint.h>
 #include <stdio.h>
+
+#include <stdint.h>
 
 
 #define TWO_TO_52_POWER 4503599527370496.0
