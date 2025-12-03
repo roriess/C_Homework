@@ -1,6 +1,3 @@
-#include <math.h>
-#include <string.h>
-
 #include "operationsForCalculations.h"
 
 char* intToBin(int elm)
@@ -14,15 +11,11 @@ char* intToBin(int elm)
         flag = 1;
     }
 
-    for (int i = bits - 1; i >= 0; i--) {
+    for (int i = bits - 1; i >= 0; i--)
         binElm[index++] = ((elm >> i) & 1) + '0';
 
-        if (i % 4 == 0 && i != 0)
-            binElm[index++] = ' ';
-    }
-    if (flag) {
+    if (flag)
         binElm[0] = '1';
-    }
 
     binElm[index] = '\0';
 
@@ -42,10 +35,8 @@ int binToInt(char elm[])
     }
 
     while (len >= 0) {
-        if (elm[len] != ' ') {
-            intElm += (elm[len] - '0') * pow(2, degree);
-            degree++;
-        }
+        intElm += (elm[len] - '0') * pow(2, degree);
+        degree++;
         len--;
     }
 
@@ -53,6 +44,15 @@ int binToInt(char elm[])
         intElm = -intElm;
 
     return intElm;
+}
+
+void reverse(char arr[], int len)
+{
+    for (int i = 0; i < len / 2; i++) {
+        char temp = arr[i];
+        arr[i] = arr[len - 1 - i];
+        arr[len - 1 - i] = temp;
+    }
 }
 
 char* sum(char elm1[], char elm2[])
@@ -63,14 +63,8 @@ char* sum(char elm1[], char elm2[])
 
     if (elm1[0] == '1' && elm2[0] == '0' || elm2[0] == '1' && elm1[0] == '0') {
         while (len >= 0) {
-            if (elm1[len] == ' ') {
-                elmSum[index++] = ' ';
-                len--;
-                continue;
-            }
             int total = (elm1[len] - '0') - (elm2[len] - '0');
             elmSum[index++] = total + '0';
-
             len--;
         }
     } else {
@@ -78,28 +72,31 @@ char* sum(char elm1[], char elm2[])
             elm2[0] = '0';
 
         int rem = 0;
-
         while (len >= 0 || rem) {
-            if (elm1[len] == ' ') {
-                elmSum[index++] = ' ';
-                len--;
-                continue;
-            }
             int total = (elm1[len] - '0') + (elm2[len] - '0') + rem;
             rem = total / 2;
             elmSum[index++] = (total % 2) + '0';
-
             len--;
         }
     }
 
-    for (int i = 0; i < index / 2; i++) {
-        int temp = elmSum[i];
-        elmSum[i] = elmSum[index - 1 - i];
-        elmSum[index - 1 - i] = temp;
-    }
-
+    reverse(elmSum, index);
     elmSum[index] = '\0';
 
     return elmSum;
+}
+
+void printfWithSpaces(char arr[])
+{
+    int i = 0; int count = -1;
+    while (arr[i] != '\0') {
+        count++;
+        if (count == 4) {
+            printf(" ");
+            count = 0;
+        }
+        printf("%c", arr[i]);
+        i++;
+    }
+    printf("\n");
 }

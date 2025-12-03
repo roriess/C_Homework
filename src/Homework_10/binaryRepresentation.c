@@ -1,8 +1,3 @@
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "operationsForCalculations.c"
 #include "testsForBinaryRepresentation.c"
 
@@ -23,8 +18,8 @@ int main(int argc, char* argv[])
         int a, b;
         scanf("%d %d", &a, &b);
 
-        char binA[40];
-        char binB[40];
+        char binA[33];
+        char binB[33];
 
         if (a >= 0 && b < 0) {
             int temp = a;
@@ -35,15 +30,18 @@ int main(int argc, char* argv[])
         strcpy(binA, intToBin(a));
         strcpy(binB, intToBin(b));
 
-        printf("%d to bin: %s\n", a, binA);
-        printf("%d to bin: %s\n", b, binB);
+        printf("%d to bin: ", a);
+        printfWithSpaces(binA);
+        printf("%d to bin: ", b);
+        printfWithSpaces(binB);
 
         char sumElm[40];
         strcpy(sumElm, sum(binA, binB));
 
-        printf("%d + %d: %s\n", a, b, sumElm);
+        printf("%d + %d: ", a, b);
+        printfWithSpaces(sumElm);
 
-        printf("%s to int: %d\n", sumElm, binToInt(sumElm));
+        printf("to int: %d", binToInt(sumElm));
     }
 
     return 0;
