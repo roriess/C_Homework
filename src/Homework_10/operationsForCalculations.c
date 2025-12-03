@@ -88,7 +88,8 @@ char* sum(char elm1[], char elm2[])
 
 void printfWithSpaces(char arr[])
 {
-    int i = 0; int count = -1;
+    int i = 0;
+    int count = -1;
     while (arr[i] != '\0') {
         count++;
         if (count == 4) {
