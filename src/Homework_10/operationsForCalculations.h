@@ -14,3 +14,5 @@ void reverse(char arr[], int len);
 char* sum(char elm1[], char elm2[]);
 
 void printfWithSpaces(char arr[]);
+
+void process(char* arr, char data[], size_t arrSize);

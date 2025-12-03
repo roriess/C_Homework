@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
             b = temp;
         }
 
-        strcpy(binA, intToBin(a));
-        strcpy(binB, intToBin(b));
+        process(binA, intToBin(a), sizeof(binA));
+        process(binB, intToBin(b), sizeof(binB));
 
         printf("%d to bin: ", a);
         printfWithSpaces(binA);

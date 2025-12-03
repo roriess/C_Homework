@@ -101,3 +101,11 @@ void printfWithSpaces(char arr[])
     }
     printf("\n");
 }
+
+void process(char* arr, char data[], size_t arrSize)
+{
+    int i;
+    for (i = 0; i < arrSize && data[i] != '\0'; i++)
+        arr[i] = data[i];
+    arr[i] = '\0';
+}
