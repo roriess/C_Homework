@@ -1,9 +1,9 @@
-#include "operationsForSortedList.h"
+#include "operationsForSortedList.H"
 #include "testsForSortedList.c"
 
 int main(int argc, char* argv[])
 {
-    int flag = 1;
+    bool flag = 1;
     if (argc > 1) {
         for (int i = 1; i < argc; i++) {
             if (strcmp(argv[i], "--test") == 0) {
