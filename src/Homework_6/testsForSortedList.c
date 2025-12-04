@@ -1,4 +1,4 @@
-#include "operationsForSortedList.h"
+#include "operationsForSortedList.c"
 
 bool addOneElement()
 {
@@ -63,9 +63,24 @@ bool deleteUncorrectElement()
 bool emptyList()
 {
     list* numList = createList();
-    bool result = (numList->listSize == 0) && (numList->lastElement == NULL) && (numList->firstElement == NULL);
+    bool result1 = (numList->listSize == 0) && (numList->lastElement == NULL) && (numList->firstElement == NULL);
+    addElementToList(numList, 3);
+    bool result2 = (numList->listSize == 1) && (numList->lastElement == numList->firstElement);
+    deleteElementFromList(numList, 3);
+    bool result3 = deleteElementFromList(numList, 5);
     free(numList);
-    return result;
+    return result1 && result2 && result3;
+}
+
+bool duplElm()
+{
+    list* numList = createList();
+    addElementToList(numList, 3);
+    addElementToList(numList, 3);
+    bool result1 = (numList->listSize == 2);
+    deleteElementFromList(numList, 3);
+    bool result2 = (numList->listSize == 1) && (numList->lastElement == numList->firstElement);
+    return result1 && result2;
 }
 
 void runTests()
@@ -75,11 +90,13 @@ void runTests()
     bool emptyLst = emptyList();
     bool uncorrectElm = deleteUncorrectElement();
     bool addLargeNumberOfElm = addLargeNumberOfElements();
+    bool duplicate = duplElm();
 
     bool result1 = addOneElm && delete;
     bool result2 = emptyLst && uncorrectElm;
-    bool result3 = result1 && addLargeNumberOfElm;
-    bool finalResult = result3 && result2;
+    bool result3 = addLargeNumberOfElm && duplicate;
+    bool result4 = result1 && result2;
+    bool finalResult = result3 && result4;
 
     if (finalResult) {
         printf("All tests passed successfully!\n");
@@ -95,6 +112,8 @@ void runTests()
             printf("- Handling incorrect deletion failed\n");
         if (!addLargeNumberOfElm)
             printf("- Adding multiple elements failed\n");
+        if (!duplicate)
+            printf("- Working with duplicate elements failed\n");
     }
     return;
 }

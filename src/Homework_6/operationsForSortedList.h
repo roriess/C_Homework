@@ -20,6 +20,6 @@ list* createList();
 
 void addElementToList(list* numList, int newElement);
 
-void deleteElementFromList(list* numList, int delElm);
+int deleteElementFromList(list* numList, int delElm);
 
 void printTheList(list* numList);

@@ -54,11 +54,11 @@ void addElementToList(list* numList, int newElement)
     (numList->listSize)++;
 }
 
-void deleteElementFromList(list* numList, int delElm)
+int deleteElementFromList(list* numList, int delElm)
 {
     if (numList->listSize == 0 || numList->firstElement == NULL) {
         printf("Error: list is empty!\n");
-        return;
+        return 1;
     }
 
     element* current = numList->firstElement;
@@ -71,7 +71,7 @@ void deleteElementFromList(list* numList, int delElm)
 
     if (current == NULL) {
         printf("Error: Element not found!\n");
-        return;
+        return 1;
     }
 
     if (prev == NULL) {
@@ -88,6 +88,7 @@ void deleteElementFromList(list* numList, int delElm)
 
     free(current);
     (numList->listSize)--;
+    return 0;
 }
 
 void printTheList(list* numList)
