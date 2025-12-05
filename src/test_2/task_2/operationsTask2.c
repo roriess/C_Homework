@@ -1,10 +1,12 @@
 #include "operationsTask2.h"
 
-void createNode(int valueElm)
+Node* createNode(int valueElm)
 {
     Node* elm = malloc(sizeof(Node));
     elm->value = valueElm;
     elm->next = NULL;
+
+    return elm;
 }
 
 void addToArr(Node** head, int valueElm)
@@ -38,13 +40,13 @@ Node* reverseArr(Node* head)
 
 int compare(Node* reversed, Node* original)
 {
-    int rev = reversed->value;
-    int orig = original->value;
+    Node* rev = reversed;
+    Node* orig = original;
     while (rev != NULL && orig != NULL) {
-        if (rev != orig)
+        if (rev->value != orig->value)
             return 0;
-        rev = reversed->next->value;
-        orig = original->next->value;
+        rev = reversed->next;
+        orig = original->next;
     }
     return (rev == NULL && orig == NULL);
 }
@@ -57,7 +59,7 @@ int isSymmetric(Node* head)
     return result;
 }
 
-void freeArr(Node* head)
+void freeArr(Node** head)
 {
     Node* current = *head;
     Node* nextElm;

@@ -1,17 +1,21 @@
 #pragma once
 
-typedef struct Node() {
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
     int value;
     struct Node* next;
-} Spisok;
+} Node;
 
-void createNode(int valueElm);
+Node* createNode(int valueElm);
 
 void addToArr(Node** head, int valueElm);
 
-void reverseArr(Node* head);
+Node* reverseArr(Node* head);
 
-void compare(Node* reversed, Node* original);
+int compare(Node* reversed, Node* original);
 
 int isSymmetric(Node* head);
 
