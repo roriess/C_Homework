@@ -17,3 +17,15 @@ void shiftToLeft(bool arr[], int size)
     }
     arr[size - 1] = first;
 }
+
+int findMax(bool arr[], int size)
+{
+    int maxNum = 0;
+    for (int i = 0; i < size; i++) {
+        int num = binToInt(arr, size);
+        maxNum = (num > maxNum) ? num : maxNum;
+        shiftToLeft(arr, size);
+    }
+
+    return maxNum;
+}

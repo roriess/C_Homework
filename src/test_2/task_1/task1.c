@@ -1,15 +1,24 @@
 #include "operationsTask1.c"
+#include "testsTask1.c"
 
-int main()
+int main(int argc, char* argv[])
 {
-    bool arr[] = { 1, 1, 0 };
-    int size = sizeof(arr) / sizeof(arr[0]);
-    int maxNum = 0;
-    for (int i = 0; i < size; i++) {
-        int num = binToInt(arr, size);
-        maxNum = (num > maxNum) ? num : maxNum;
-        shiftToLeft(arr, size);
+    int flag = 1;
+    if (argc > 1) {
+        for (int i = 1; i < argc; i++) {
+            if (strcmp(argv[i], "--test") == 0) {
+                runTests();
+                flag = 0;
+                break;
+            }
+        }
     }
-    printf("%d", maxNum);
+    if (flag) {
+        bool arr[] = { 1, 1, 0 };
+        int size = sizeof(arr) / sizeof(arr[0]);
+        int maxNum = findMax(arr, size);
+        printf("%d", maxNum);
+    }
+
     return 0;
 }
