@@ -1,4 +1,4 @@
-#include "operationsTask1.c"
+#include "operationsTask1.h"
 #include "testsTask1.c"
 
 int main(int argc, char* argv[])
