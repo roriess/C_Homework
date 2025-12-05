@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
         }
     }
     if (flag) {
-        bool arr[] = { 1, 1, 0 };
+        bool arr[] = {};
         int size = sizeof(arr) / sizeof(arr[0]);
         int maxNum = findMax(arr, size);
         printf("%d", maxNum);
