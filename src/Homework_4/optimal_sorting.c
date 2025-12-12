@@ -23,7 +23,6 @@ void strToArr(const char* str, int* arr)
         arr[numCount++] = currentNum;
 }
 
-
 void bubbleSort(int arr[], int lengthArr)
 {
     for (int i = 0; i < lengthArr - 1; i++) {
