@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.25)
+
+project(homework_3 C)
+
+add_executable(number_of_zero_elements number_of_zero_elements.c)
+add_executable(simple_balance_of_brackets simple_balance_of_brackets.c)
+add_executable(substring_search substring_search.c)
