@@ -5,7 +5,7 @@
 
 #define MAX_LEN 100
 
-void strToArr(const char* str, int* arr) 
+void strToArr(const char* str, int* arr)
 {
     int currentNum = 0;
     int numCount = 0;
@@ -24,7 +24,8 @@ void strToArr(const char* str, int* arr)
 }
 
 
-void bubbleSort(int arr[], int lengthArr) {
+void bubbleSort(int arr[], int lengthArr)
+{
     for (int i = 0; i < lengthArr - 1; i++) {
         for (int j = 0; j < lengthArr - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
@@ -36,7 +37,7 @@ void bubbleSort(int arr[], int lengthArr) {
     }
 }
 
-int main() 
+int main()
 {
     char str[MAX_LEN];
     scanf("%99[^\n]", str);
@@ -44,7 +45,6 @@ int main()
     int arr[MAX_LEN], originalArr[MAX_LEN];
 
     strToArr(str, arr);
-    
     int lengthArr = 0;
     while (arr[lengthArr])
         lengthArr++;
