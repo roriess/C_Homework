@@ -3,8 +3,7 @@
 
 #include "operationsForSortedList.h"
 
-
-list* createList() 
+list* createList()
 {
     list* numList = malloc(sizeof(list));
     if (numList == NULL) {
@@ -19,8 +18,7 @@ list* createList()
     return numList;
 }
 
-
-void addElementToList(list* numList, int newElement) 
+void addElementToList(list* numList, int newElement)
 {
     element* newElm = malloc(sizeof(element));
 
@@ -59,7 +57,6 @@ void addElementToList(list* numList, int newElement)
     (numList->listSize)++;
 }
 
-
 void deleteElementFromList(list* numList, int delElm)
 {
     if (numList->listSize == 0 || numList->firstElement == NULL) {
@@ -96,8 +93,7 @@ void deleteElementFromList(list* numList, int delElm)
     (numList->listSize)--;
 }
 
-
-void printTheList(list* numList) 
+void printTheList(list* numList)
 {
     element* current = numList->firstElement;
 
