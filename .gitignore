@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# Cache directories
+.cache/
+build/
+
 # Object files
 *.o
 *.ko
