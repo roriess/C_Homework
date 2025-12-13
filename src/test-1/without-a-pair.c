@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(void)
 {
@@ -21,7 +22,7 @@ int main(void)
     int res[size];
     int j = 0;
     for (int e = 0; e < i; e++) {
-        int flag = 0;
+        bool flag = 0;
         for (int r = 0; r < i; r++) {
             if (e == r)
                 continue;
