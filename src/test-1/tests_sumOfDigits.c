@@ -44,7 +44,7 @@ void runTests()
 {
     bool res1 = sameSum() && zero();
     bool res2 = bigNum() && difNum1();
-    bool res3 = difNum2() && res1; 
+    bool res3 = difNum2() && res1;
     bool finalResul = res3 && res2;
 
     if (finalResul) {
@@ -60,6 +60,5 @@ void runTests()
             printf("Error with ordinary elements\n");
         if (!difNum2())
             printf("Error with a ordinary elements\n");
-        
     }
 }
