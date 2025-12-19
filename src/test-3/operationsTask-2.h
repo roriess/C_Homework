@@ -7,7 +7,7 @@ typedef struct Node {
 
 Node* create(int nodeValue);
 
-void addNode(Node* node, Node* new);
+void addNode(Node* node, Node* newNode);
 
 void print(Node* node);
 

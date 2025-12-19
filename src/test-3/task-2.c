@@ -1,7 +1,8 @@
 #include "operationsTask-2.c"
 #include "test_task-2.c"
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+
 
 void main(int argc, char* argv[])
 {
