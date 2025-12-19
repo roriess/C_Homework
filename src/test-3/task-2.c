@@ -1,4 +1,4 @@
-#include "operationsTask-2.c"
+#include "operationsTask-2.h"
 #include "test_task-2.c"
 #include <stdbool.h>
 #include <stdio.h>
