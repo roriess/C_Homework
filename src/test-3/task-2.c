@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-
 void main(int argc, char* argv[])
 {
     bool flag = 1;
