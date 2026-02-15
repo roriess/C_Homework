@@ -1,3 +1,3 @@
 #pragma once
 
-char** readText(char* fileName);
+void readAndAddText(char* newFileName, char* oldFileName);

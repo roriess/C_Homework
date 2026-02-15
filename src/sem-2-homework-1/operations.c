@@ -2,47 +2,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char** readText(char* fileName)
+void readAndAddText(char* newFileName, char* oldFileName)
 {
-    FILE* f = fopen(fileName, "r");
-    if (f == NULL) {
+    FILE* oldFile = fopen(oldFileName, "r");
+    if (oldFile == NULL) {
         printf("File not found.");
-        return NULL;
+        return;
     }
 
-    int maxLines = 100;
-    char** data = malloc(sizeof(char*) * maxLines); // массив указателей на строки файла
+    FILE* newFile = fopen(newFileName, "w");
+    if (newFile == NULL) {
+        printf("File not created or found.");
+        return;
+    }
     int linesRead = 0;
-
-    while (!feof(f)) {
+    while (!feof(oldFile)) {
         char* buffer = malloc(sizeof(char) * 100);
-        const int readBytes = fscanf(f, "%[^\n]", buffer);
+        const int readBytes = fscanf(oldFile, "%[^\n]", buffer);
         if (readBytes < 0)
             break;
 
-        if (linesRead >= maxLines) {
-            maxLines *= 2;
-            char** temp = realloc(data, sizeof(char*) * maxLines);
-            if (temp == NULL) {
-                printf("Memory allocation error.\n");
-                free(buffer);
-                break;
-            }
-            data = temp;
-        }
+        // так как scanf читает до '\n', удалаяем оставшийся символ '\n'
+        int c = fgetc(oldFile);
+        if (c != EOF && c != '\n')
+            ungetc(c, oldFile);
 
-        data[linesRead] = buffer;
+        fprintf(newFile, "%s\n", buffer);
         linesRead++;
-
-        // так как scanf читает до '/n', удалаяем оставшийся символ '/n'  
-        int c = fgetc(f);
-        if (c != EOF && c != '\n') 
-            ungetc(c, f);
     }
-    fclose(f);
-
-    for (int i = 0; i < linesRead; i++)
-        printf("%s\n", data[i]);
-
-    return data;
+    fclose(oldFile);
+    fclose(newFile);
 }

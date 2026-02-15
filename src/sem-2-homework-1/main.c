@@ -1,8 +1,8 @@
-#include "operations.h"
+#include "operations.c"
 
 #include <stdio.h>
 
 int main()
 {
-    char** text = readText("input.csv");
+    readAndAddText("output.txt", "input.csv");
 }
