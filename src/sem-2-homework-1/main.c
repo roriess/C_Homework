@@ -2,14 +2,11 @@
 
 #include <stdio.h>
 
-int main()
+void main()
 {
     Data* text = readText("input.csv");
 
-    const int count = countColumns(text);
-    const int* spaces = spacesCount(text);
-    for (int i = 0; i < count; i++) {
-        printf("%d\n", spaces[i]);
-    }
-    return 0;
+    text->columnCount = countColumns(text);
+    const int* widthOfColumn = columnWidth(text);
+    dataFormatting(text, "output.txt", widthOfColumn);
 }
