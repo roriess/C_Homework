@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int countCommas(const char* str)
+const int countColumns(Data* data)
 {
+    const char* str = data->data[0];
     int count = 0;
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == ',')
@@ -12,67 +13,75 @@ int countCommas(const char* str)
     return count + 1;
 }
 
-int* spacesCount(const char* str, int columnCount)
+const int* spacesCount(Data* data)
 {
-    int* data = malloc(sizeof(int) * columnCount);
-    int count = 0;
-    int columnNumber = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] != ',') {
-            count++;
-        } else {
-            if (count > data[columnNumber])
-                data[columnNumber] = count;
-            columnNumber++;
-            count = 0;
-        }
-    }
+    int columnCount = countColumns(data);
+    int* spaces = malloc(sizeof(int) * columnCount);
     for (int i = 0; i < columnCount; i++)
-        printf("%d", data[i]);
+        spaces[i] = 0;
 
-    return data;
+    for (int i = 0; i < data->linesCount; i++) {
+        const char* str = data->data[i];
+        int count = 0;
+        int columnNumber = 0;
+        for (int j = 0; str[j] != '\0'; j++) {
+            if (str[j] != ',') {
+                count++;
+            } else {
+                if (count > spaces[columnNumber])
+                    spaces[columnNumber] = count;
+                columnNumber++;
+                count = 0;
+            }
+        }
+        if (count > spaces[columnNumber])
+            spaces[columnNumber] = count;
+    }
+    return spaces;
 }
 
-char* stringFormatting(char* str, const int* data)
+Data* readText(const char* fileName)
 {
-}
-
-void readAndAddText(char* newFileName, const char* oldFileName)
-{
-    FILE* oldFile = fopen(oldFileName, "r");
-    if (oldFile == NULL) {
+    FILE* f = fopen(fileName, "r");
+    if (f == NULL) {
         printf("File not found.");
-        return;
+        exit(1);
     }
 
-    FILE* newFile = fopen(newFileName, "w");
-    if (newFile == NULL) {
-        printf("File not created or found.");
-        return;
-    }
+    int maxLines = 100;
+    Data* data = malloc(sizeof(Data));
+    data->data = malloc(sizeof(char*) * maxLines); // массив указателей на строки файла
+    data->linesCount = 0;
 
-    int linesRead = 0;
-    int columnCount;
-    int firstLine = 1; // для подсчета количества столбцов
-    while (!feof(oldFile)) {
+    while (!feof(f)) {
         char* buffer = malloc(sizeof(char) * 100);
-        const int readBytes = fscanf(oldFile, "%[^\n]", buffer);
+        const int readBytes = fscanf(f, "%[^\n]", buffer);
         if (readBytes < 0)
             break;
 
-        // так как scanf читает до '\n', удалаяем оставшийся символ '\n'
-        int c = fgetc(oldFile);
-        if (c != EOF && c != '\n')
-            ungetc(c, oldFile);
-
-        fprintf(newFile, "%s\n", buffer);
-        linesRead++;
-
-        if (firstLine) {
-            columnCount = countCommas(buffer) + 1;
-            firstLine = 0;
+        if (data->linesCount >= maxLines) {
+            maxLines *= 2;
+            const char** temp = realloc(data, sizeof(char*) * maxLines);
+            if (temp == NULL) {
+                printf("Memory allocation error.\n");
+                free(buffer);
+                break;
+            }
+            data->data = temp;
         }
+
+        data->data[data->linesCount] = buffer;
+        data->linesCount++;
+
+        // так как scanf читает до '\n', удалаяем оставшийся символ '\n'
+        int c = fgetc(f);
+        if (c != EOF && c != '\n')
+            ungetc(c, f);
     }
-    fclose(oldFile);
-    fclose(newFile);
+    fclose(f);
+
+    for (int i = 0; i < data->linesCount; i++)
+        printf("%s\n", data->data[i]);
+
+    return data;
 }

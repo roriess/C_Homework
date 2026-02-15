@@ -1,10 +1,15 @@
 #pragma once
 
-// подсчет кол-ва запятых в одной строке для определения кол-ва столбцов таблицы
-int countCommas(const char* str);
+typedef struct {
+    const char** data;
+    int linesCount;
+} Data;
+
+// подсчет кол-ва столбцов таблицы
+const int countColumns(Data* data);
 
 // подсчет ширины столбцов
-int* spacesCount(const char* str, int columnCount);
+const int* spacesCount(Data* data);
 
-// чтение данных из input.csv и добавление (с итоговым форматированием) в output.txt
-void readAndAddText(char* newFileName, const char* oldFileName);
+// чтение данных из input.csv в массив указателей на строки
+Data* readText(const char* fileName);
