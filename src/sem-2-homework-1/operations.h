@@ -30,7 +30,10 @@ void tableBottom(FILE* f, Data* data, const int* countOfSpaces);
 void dividersForTitle(FILE* f, Data* data, const int* countOfSpaces);
 
 // тонкий разделитель строк
-void ordinatyDividers(FILE* f, Data* data, const int* countOfSpaces);
+void ordinaryDividers(FILE* f, Data* data, const int* countOfSpaces);
 
-// форматирование текста и рисовка таблицы
+// рисование внутренних границ таблицы
+void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* titleDivider, char* ordinaryDivider);
+
+// итоговая рисовка
 void dataFormatting(Data* data, const char* newFileName, const int* countOfSpaces);

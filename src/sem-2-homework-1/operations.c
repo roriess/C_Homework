@@ -127,7 +127,7 @@ void dividersForTitle(FILE* f, Data* data, const int* countOfSpaces)
     fprintf(f, "═╣\n");
 }
 
-void ordinatyDividers(FILE* f, Data* data, const int* countOfSpaces)
+void ordinaryDividers(FILE* f, Data* data, const int* countOfSpaces)
 {
     fprintf(f, "╠─");
     for (int i = 0; i < data->columnCount; i++) {
@@ -137,6 +137,49 @@ void ordinatyDividers(FILE* f, Data* data, const int* countOfSpaces)
             fprintf(f, "─⁠┼─");
     }
     fprintf(f, "─╣\n");
+}
+
+void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* titleDivider, char* ordinaryDivider)
+{
+    for (int i = 0; i < data->linesCount; i++) {
+        const char* str = data->data[i];
+        fprintf(f, "║ ");
+        int countWidth = 0, columnNumber = 0;
+        for (int j = 0; str[j] != '\0'; j++) {
+            if (str[j] != ',') {
+                fprintf(f, "%c", str[j]);
+                countWidth++;
+            } else {
+                if (countWidth < countOfSpaces[columnNumber]) {
+                    for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
+                        fprintf(f, " ");
+                }
+                fprintf(f, " ");
+                if (flag) {
+                    fprintf(f, "%s", titleDivider);
+                } else {
+                    fprintf(f, "%s", ordinaryDivider);
+                }
+                fprintf(f, " ");
+                columnNumber++;
+                countWidth = 0;
+            }
+        }
+        if (countWidth < countOfSpaces[columnNumber]) {
+            for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
+                fprintf(f, " ");
+        }
+        fprintf(f, " ║\n");
+
+        if (i + 1 < data->linesCount) {
+            if (!flag) {
+                ordinaryDividers(f, data, countOfSpaces);
+            } else {
+                dividersForTitle(f, data, countOfSpaces);
+                flag = 0;
+            }
+        }
+    }
 }
 
 void dataFormatting(Data* data, const char* newFileName, const int* countOfSpaces)
@@ -149,61 +192,6 @@ void dataFormatting(Data* data, const char* newFileName, const int* countOfSpace
 
     const int widthOfTable = tableWidth(data, countOfSpaces);
     tableTop(f, data, countOfSpaces);
-
-    // для заголовка
-    const char* str = data->data[0];
-    fprintf(f, "║ ");
-    int countWidth = 0;
-    int columnNumber = 0;
-    for (int j = 0; str[j] != '\0'; j++) {
-        if (str[j] != ',') {
-            fprintf(f, "%c", str[j]);
-            countWidth++;
-        } else {
-            if (countWidth < countOfSpaces[columnNumber]) {
-                for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
-                    fprintf(f, " ");
-            }
-            fprintf(f, " ║ ");
-            columnNumber++;
-            countWidth = 0;
-        }
-    }
-    if (countWidth < countOfSpaces[columnNumber]) {
-        for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
-            fprintf(f, " ");
-    }
-    fprintf(f, " ║\n");
-    dividersForTitle(f, data, countOfSpaces);
-
-    // для остальных строк таблицы
-    for (int i = 1; i < data->linesCount; i++) {
-        str = data->data[i];
-        fprintf(f, "║ ");
-        countWidth = 0;
-        columnNumber = 0;
-        for (int j = 0; str[j] != '\0'; j++) {
-            if (str[j] != ',') {
-                fprintf(f, "%c", str[j]);
-                countWidth++;
-            } else {
-                if (countWidth < countOfSpaces[columnNumber]) {
-                    for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
-                        fprintf(f, " ");
-                }
-                fprintf(f, " │ ");
-                columnNumber++;
-                countWidth = 0;
-            }
-        }
-        if (countWidth < countOfSpaces[columnNumber]) {
-            for (int k = 0; k < countOfSpaces[columnNumber] - countWidth; k++)
-                fprintf(f, " ");
-        }
-        fprintf(f, " ║\n");
-
-        if (i + 1 < data->linesCount)
-            ordinatyDividers(f, data, countOfSpaces);
-    }
+    drawindLine(f, data, countOfSpaces, 1, "║", "│");
     tableBottom(f, data, countOfSpaces);
 }
