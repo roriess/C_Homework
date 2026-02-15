@@ -7,19 +7,29 @@ Data* readText(const char* fileName)
     FILE* f = fopen(fileName, "r");
     if (f == NULL) {
         printf("File not found.");
-        exit(1);
+        return NULL;
     }
 
     int maxLines = 100;
     Data* data = malloc(sizeof(Data));
+    if (data == NULL)
+        return NULL;
     data->data = malloc(sizeof(char*) * maxLines); // массив указателей на строки файла
+    if (data->data == NULL) {
+        free(data);
+        return NULL;
+    }
     data->linesCount = 0;
 
     while (!feof(f)) {
         char* buffer = malloc(sizeof(char) * 100);
+        if (buffer == NULL)
+            return NULL;
         const int readBytes = fscanf(f, "%[^\n]", buffer);
-        if (readBytes < 0)
+        if (readBytes < 0) {
+            free(buffer);
             break;
+        }
 
         if (data->linesCount >= maxLines) {
             maxLines *= 2;
@@ -90,7 +100,8 @@ const int tableWidth(Data* data, const int* countOfSpaces)
     return widthOfTable;
 }
 
-void dividers(FILE* f, Data* data, const int* countOfSpaces, const char* left, const char* middle, const char* right, const char* line)
+void dividers(FILE* f, Data* data, const int* countOfSpaces,
+    const char* left, const char* middle, const char* right, const char* line)
 {
     fprintf(f, left);
     fprintf(f, line);
@@ -108,8 +119,10 @@ void dividers(FILE* f, Data* data, const int* countOfSpaces, const char* left, c
     fprintf(f, "\n");
 }
 
-void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* titleDivider, char* ordinaryDivider)
+void drawindLine(FILE* f, Data* data, const int* countOfSpaces,
+    char* titleDivider, char* ordinaryDivider)
 {
+    int flag = 1; // flag == 1 - заголовок
     for (int i = 0; i < data->linesCount; i++) {
         const char* str = data->data[i];
         fprintf(f, titleDivider);
@@ -162,6 +175,7 @@ void dataFormatting(Data* data, const char* newFileName, const int* countOfSpace
 
     const int widthOfTable = tableWidth(data, countOfSpaces);
     dividers(f, data, countOfSpaces, "╔", "╦", "╗", "═");
-    drawindLine(f, data, countOfSpaces, 1, "║", "│");
+    drawindLine(f, data, countOfSpaces, "║", "│");
     dividers(f, data, countOfSpaces, "╚", "╧", "╝", "═");
+    fclose(f);
 }
