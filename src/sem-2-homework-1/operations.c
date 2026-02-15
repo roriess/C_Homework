@@ -23,7 +23,7 @@ Data* readText(const char* fileName)
 
         if (data->linesCount >= maxLines) {
             maxLines *= 2;
-            const char** temp = realloc(data, sizeof(char*) * maxLines);
+            const char** temp = realloc(data->data, sizeof(char*) * maxLines);
             if (temp == NULL) {
                 printf("Memory allocation error.\n");
                 free(buffer);
@@ -90,60 +90,30 @@ const int tableWidth(Data* data, const int* countOfSpaces)
     return widthOfTable;
 }
 
-void tableTop(FILE* f, Data* data, const int* countOfSpaces)
+void dividers(FILE* f, Data* data, const int* countOfSpaces, const char* left, const char* middle, const char* right, const char* line)
 {
-    fprintf(f, "╔═");
+    fprintf(f, left);
+    fprintf(f, line);
     for (int i = 0; i < data->columnCount; i++) {
         for (int j = 0; j < countOfSpaces[i]; j++)
-            fprintf(f, "═");
-        if (i + 1 != data->columnCount)
-            fprintf(f, "═╦═");
+            fprintf(f, line);
+        if (i + 1 != data->columnCount) {
+            fprintf(f, line);
+            fprintf(f, middle);
+            fprintf(f, line);
+        }
     }
-    fprintf(f, "═╗\n");
-}
-
-void tableBottom(FILE* f, Data* data, const int* countOfSpaces)
-{
-
-    fprintf(f, "╚═");
-    for (int i = 0; i < data->columnCount; i++) {
-        for (int j = 0; j < countOfSpaces[i]; j++)
-            fprintf(f, "═");
-        if (i + 1 != data->columnCount)
-            fprintf(f, "═⁠╧═");
-    }
-    fprintf(f, "═╝\n");
-}
-
-void dividersForTitle(FILE* f, Data* data, const int* countOfSpaces)
-{
-    fprintf(f, "╠═");
-    for (int i = 0; i < data->columnCount; i++) {
-        for (int j = 0; j < countOfSpaces[i]; j++)
-            fprintf(f, "═");
-        if (i + 1 != data->columnCount)
-            fprintf(f, "═⁠╬═");
-    }
-    fprintf(f, "═╣\n");
-}
-
-void ordinaryDividers(FILE* f, Data* data, const int* countOfSpaces)
-{
-    fprintf(f, "╠─");
-    for (int i = 0; i < data->columnCount; i++) {
-        for (int j = 0; j < countOfSpaces[i]; j++)
-            fprintf(f, "─");
-        if (i + 1 != data->columnCount)
-            fprintf(f, "─⁠┼─");
-    }
-    fprintf(f, "─╣\n");
+    fprintf(f, line);
+    fprintf(f, right);
+    fprintf(f, "\n");
 }
 
 void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* titleDivider, char* ordinaryDivider)
 {
     for (int i = 0; i < data->linesCount; i++) {
         const char* str = data->data[i];
-        fprintf(f, "║ ");
+        fprintf(f, titleDivider);
+        fprintf(f, " ");
         int countWidth = 0, columnNumber = 0;
         for (int j = 0; str[j] != '\0'; j++) {
             if (str[j] != ',') {
@@ -173,9 +143,9 @@ void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* 
 
         if (i + 1 < data->linesCount) {
             if (!flag) {
-                ordinaryDividers(f, data, countOfSpaces);
+                dividers(f, data, countOfSpaces, "╠", "┼", "╣", "⁠─");
             } else {
-                dividersForTitle(f, data, countOfSpaces);
+                dividers(f, data, countOfSpaces, "╠", "╬", "╣", "═");
                 flag = 0;
             }
         }
@@ -191,7 +161,7 @@ void dataFormatting(Data* data, const char* newFileName, const int* countOfSpace
     }
 
     const int widthOfTable = tableWidth(data, countOfSpaces);
-    tableTop(f, data, countOfSpaces);
+    dividers(f, data, countOfSpaces, "╔", "╦", "╗", "═");
     drawindLine(f, data, countOfSpaces, 1, "║", "│");
-    tableBottom(f, data, countOfSpaces);
+    dividers(f, data, countOfSpaces, "╚", "╧", "╝", "═");
 }

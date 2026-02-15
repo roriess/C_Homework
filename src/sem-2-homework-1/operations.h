@@ -20,19 +20,10 @@ const int* columnWidth(Data* data);
 // подсчет ширины таблицы
 const int tableWidth(Data* data, const int* countOfSpaces);
 
-// верхняя часть таблицы
-void tableTop(FILE* f, Data* data, const int* countOfSpaces);
+// рисование границ таблицы (внешних и внутренних)
+void dividers(FILE* f, Data* data, const int* countOfSpaces, const char* left, const char* middle, const char* right, const char* line);
 
-// нижняя часть таблицы
-void tableBottom(FILE* f, Data* data, const int* countOfSpaces);
-
-// толстый разделитель строк
-void dividersForTitle(FILE* f, Data* data, const int* countOfSpaces);
-
-// тонкий разделитель строк
-void ordinaryDividers(FILE* f, Data* data, const int* countOfSpaces);
-
-// рисование внутренних границ таблицы
+// рисование границ между столбцами и добаление данных в файл
 void drawindLine(FILE* f, Data* data, const int* countOfSpaces, int flag, char* titleDivider, char* ordinaryDivider);
 
 // итоговая рисовка
